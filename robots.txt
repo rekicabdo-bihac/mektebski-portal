@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rekicabdo-bihac.github.io/mektebski-portal/sitemap.xml
