@@ -16,7 +16,7 @@ header{padding:9px 12px}
 .signature{width:auto;flex:1 1 45%;font-size:10px;text-align:right;max-width:58%;line-height:1.35}
 }
 @media(max-width:350px){.item h3{font-size:12px}.item a{font-size:11px}.signature{font-size:9px}}
-.visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#f0f8f4}.visual img{width:100%;height:100%;object-fit:contain}.emojiVisual{font-size:clamp(44px,8vw,75px);background:linear-gradient(145deg,#e2f5e9,#dbe9ff)}.item{padding:10px}.item h3{font-size:15px}.unlinked{background:#f2f4f3;padding:9px;border-radius:8px;text-align:center}.grid{margin-bottom:24px}@media(max-width:650px){.item{padding:7px}.item h3{font-size:12px}.visual{border-radius:9px}} .portal-edit-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.portal-edit-tools button,.edit-card-btn,.editor-actions button{border:0;border-radius:9px;padding:11px 14px;font-weight:700;background:#075f51;color:white}.portal-edit-tools .secondary,.editor-actions .secondary{background:#e7f1ee;color:#064c42}.portal-edit-tools .hint{font-size:12px;width:100%}.edit-card-btn{margin-top:9px;width:100%;background:#d6eee6;color:#075044}#portalEditor{border:0;border-radius:15px;padding:18px;width:min(92vw,520px);max-height:90vh;overflow:auto}#portalEditor::backdrop{background:#0009}#portalEditor label{display:block;margin:12px 0 4px;font-weight:700}#portalEditor input,#portalEditor select{display:block;width:100%;padding:11px;border:1px solid #9db8b0;border-radius:8px;box-sizing:border-box;font-size:16px}#portalEditor .editor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}</style><script id="portal-manual-data" type="application/json">{}</script><script>
+.visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#f0f8f4}.visual img{width:100%;height:100%;object-fit:contain}.emojiVisual{font-size:clamp(44px,8vw,75px);background:linear-gradient(145deg,#e2f5e9,#dbe9ff)}.item{padding:10px}.item h3{font-size:15px}.unlinked{background:#f2f4f3;padding:9px;border-radius:8px;text-align:center}.grid{margin-bottom:24px}@media(max-width:650px){.item{padding:7px}.item h3{font-size:12px}.visual{border-radius:9px}} .portal-edit-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.portal-edit-tools button,.edit-card-btn,.editor-actions button{border:0;border-radius:9px;padding:11px 14px;font-weight:700;background:#075f51;color:white}.portal-edit-tools .secondary,.editor-actions .secondary{background:#e7f1ee;color:#064c42}.portal-edit-tools .hint{font-size:12px;width:100%}.edit-card-btn{margin-top:9px;width:100%;background:#d6eee6;color:#075044}#portalEditor{border:0;border-radius:15px;padding:18px;width:min(92vw,520px);max-height:90vh;overflow:auto}#portalEditor::backdrop{background:#0009}#portalEditor label{display:block;margin:12px 0 4px;font-weight:700}#portalEditor input,#portalEditor select{display:block;width:100%;padding:11px;border:1px solid #9db8b0;border-radius:8px;box-sizing:border-box;font-size:16px}#portalEditor .editor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}</style><script>
 /* Google Analytics: consent mode (default denied); no analytics cookies without consent. */
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments)}
@@ -113,44 +113,7 @@ function generatedIcon(x){
  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
 }
 
-const manualDataElement=document.getElementById('portal-manual-data');
-let savedManual={};try{savedManual=JSON.parse(manualDataElement.textContent||'{}')}catch(e){}
-let localManual={};try{localManual=JSON.parse(localStorage.getItem('mekteb-portal-manual-v1')||'{}')}catch(e){}
-let manualCards={...savedManual,...localManual},editingPortal=false,currentEditKey=null;
-const editor=document.getElementById('portalEditor'),editorGroup=document.getElementById('editGroup');
-groups.forEach(g=>{const opt=document.createElement('option');opt.value=g[0];opt.textContent=g[2];editorGroup.append(opt)});
-function getManual(key,base){return {...base,...(manualCards[key]||{})}}
-function saveManual(){localStorage.setItem('mekteb-portal-manual-v1',JSON.stringify(manualCards))}
-function editCard(key,base){
- currentEditKey=key;const d=getManual(key,base);
- document.getElementById('editTitle').value=d.title||'';
- editorGroup.value=d.group||'ilmihal1';
- document.getElementById('editOrder').value=d.order||'';
- document.getElementById('editImage').value=d.image||'';
- document.getElementById('editLink').value=d.url||'';
- editor.showModal();
-}
-document.getElementById('closeEditor').onclick=()=>editor.close();
-document.getElementById('resetCard').onclick=()=>{if(currentEditKey){delete manualCards[currentEditKey];saveManual();editor.close();render()}};
-document.getElementById('editCardForm').onsubmit=e=>{
- e.preventDefault();if(!currentEditKey)return;
- const url=document.getElementById('editLink').value.trim();
- if(url&&!/^https:\/\//i.test(url)){alert('Poveznica mora početi sa https://');return}
- manualCards[currentEditKey]={title:document.getElementById('editTitle').value.trim(),group:editorGroup.value,order:Number(document.getElementById('editOrder').value)||0,image:document.getElementById('editImage').value.trim(),url};
- saveManual();editor.close();render();
-};
-document.getElementById('togglePortalEdit').onclick=()=>{
- editingPortal=!editingPortal;
- document.getElementById('togglePortalEdit').textContent=editingPortal?'✓ Završi uređivanje':'✏️ Uredi portal';
- document.getElementById('exportPortal').hidden=!editingPortal;
- document.getElementById('editHint').hidden=!editingPortal;render();
-};
-document.getElementById('exportPortal').onclick=()=>{
- manualDataElement.textContent=JSON.stringify(manualCards).replace(/</g,'\\u003c');
- const blob=new Blob(['<!doctype html>\n'+document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});
- const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-};
-function makeCard(x,number,iconUrl,unlinked=false,editKey="",editBase=null){
+function makeCard(x,number,iconUrl,unlinked=false){
  const el=document.createElement('article');el.className='item';
  const visual=document.createElement('div');visual.className='visual';
  if(iconUrl){const img=document.createElement('img');img.src=iconUrl;img.loading='lazy';img.alt='Ikonica: '+x.title;visual.append(img)}
@@ -160,7 +123,6 @@ function makeCard(x,number,iconUrl,unlinked=false,editKey="",editBase=null){
  el.append(visual,h,s);
  if(x.url){const a=document.createElement('a');a.href=x.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Otvori lekciju ↗';a.addEventListener('click',()=>trackPortalEvent('content_open',{content_name:x.name,content_category:x.group}));el.append(a)}
  else{const note=document.createElement('small');note.className='unlinked';note.textContent='Poveznica lekcije nije pronađena';el.append(note)}
- if(editingPortal&&editKey){const btn=document.createElement('button');btn.className='edit-card-btn';btn.type='button';btn.textContent='✏️ Uredi karticu';btn.onclick=()=>editCard(editKey,editBase);el.append(btn)}
  return el;
 }
 function render(){
@@ -169,22 +131,18 @@ function render(){
  results.replaceChildren();let count=0;
  const sections=chosen==='all'?groups.map(g=>g[0]):[chosen];
  for(const section of sections){
+  const isBook=!!bookLessons[section];
   let cards=[];
-  for(const [bookGroup,lessons] of Object.entries(bookLessons)){
-   for(const lesson of lessons){
-    const key='book:'+bookGroup+':'+lesson.number,matched=findRepo(lesson,bookGroup);
-    const base={title:lesson.label.replace(/\\b\\w/g,c=>c.toLocaleUpperCase('bs')),group:bookGroup,image:lesson.image,url:matched?.url||'',order:lesson.number};
-    const data=getManual(key,base);
-    if(data.group!==section||(q&&!normalized(data.title).includes(q)))continue;
-    cards.push({order:Number(data.order)||lesson.number,node:makeCard({title:data.title,group:data.group,name:matched?.name||'',url:data.url},lesson.number,data.image,false,key,base)});
-   }
+  if(isBook){for(const lesson of bookLessons[section]){
+    const matched=findRepo(lesson,section);
+    const title=lesson.label.replace(/\b\w/g,c=>c.toLocaleUpperCase('bs'));
+    if(q&&!normalized(title).includes(q))continue;
+    cards.push(makeCard({title,group:section,name:matched?.name||'',url:matched?.url},lesson.number,lesson.image));
+  }}else{
+   const groupItems=items.filter(x=>x.group===section&&(!q||normalized(x.title).includes(q)));
+   groupItems.sort((a,b)=>section==='sure'?surahRank(a)-surahRank(b)||a.title.localeCompare(b.title,'bs'):a.title.localeCompare(b.title,'bs'));
+   cards=groupItems.map(x=>makeCard(x));
   }
-  for(const x of items){
-   const key='repo:'+x.name,base={title:x.title,group:x.group,image:'',url:x.url,order:0},data=getManual(key,base);
-   if(data.group!==section||(q&&!normalized(data.title).includes(q)))continue;
-   cards.push({order:Number(data.order)||9999,node:makeCard({...x,title:data.title,group:data.group,url:data.url},null,data.image,false,key,base)});
-  }
-  cards.sort((a,b)=>a.order-b.order);cards=cards.map(c=>c.node);
   if(!cards.length)continue;
   if(chosen==='all'){const h=document.createElement('h2');h.textContent=groups.find(g=>g[0]===section)?.[2]||section;results.append(h)}
   const grid=document.createElement('div');grid.className='grid';cards.forEach(c=>grid.append(c));results.append(grid);count+=cards.length;
