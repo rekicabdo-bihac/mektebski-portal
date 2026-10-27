@@ -77,10 +77,25 @@ let items=[],chosen='all';const cats=document.getElementById('cats'),results=doc
 const emojis={ilmihal1:'📗',ilmihal2:'📘',ilmihal3:'📙',stranice:'📖',sure:'📖',tedzvid:'🔤',dove:'🤲',pjesmice:'🎵',memori_kviz:'🧩',kvizovi:'🧠',igrice:'🎮',takmicenja:'🏆',downloads:'⬇️'};
 const surahOrder=['fatiha','bekare','ihlas','felek','nas','kevser','kafirun','asr','maun','kurejs','tekasur','humeze','fil','leheb','nasr'];
 function surahRank(x){const n=normalized(x.name);let j=surahOrder.findIndex(w=>n.includes(w));return j<0?999:j}
+// Povezuj samo stvarno pronađene javne GitHub projekte, ne rezervne nazive.
+let confirmedRepoNames=new Set();
+const exactLessonRepos={
+ 'ilmihal1:18':'sura-fatiha',
+ 'ilmihal1:78':'suretu-nnas'
+};
 function findRepo(lesson,groupName){
- let candidates=items.filter(x=>x.group===groupName&&x.name!==`ilmihal${groupName.slice(-1)}-lekcije`&&x.name!==`ilmihal${groupName.slice(-1)}-interaktivni`);
- let ranked=candidates.map(x=>({x,score:lessonMatch(x,lesson)})).sort((a,b)=>b.score-a.score);
- return ranked[0]?.score>=0.5?ranked[0].x:null;
+ const explicit=exactLessonRepos[groupName+':'+lesson.number];
+ if(explicit&&confirmedRepoNames.has(explicit))return items.find(x=>x.name===explicit)||null;
+ const candidates=items.filter(x=>confirmedRepoNames.has(x.name)&&!/^ilmihal[123]-(lekcije|interaktivni)$/.test(x.name));
+ const ranked=candidates.map(x=>{
+   const score=lessonMatch(x,lesson);
+   const sameGroup=x.group===groupName;
+   return {x,score:score+(sameGroup?0.08:0)};
+ }).filter(r=>r.score>=0.64).sort((a,b)=>b.score-a.score);
+ // Ne povezuj nejasne podudarnosti sa pogrešnom lekcijom.
+ if(!ranked.length)return null;
+ if(ranked.length>1&&ranked[0].score-ranked[1].score<0.06&&ranked[0].x.name!==ranked[1].x.name)return null;
+ return ranked[0].x;
 }
 // Jedinstvena, samostalna ilustrirana ikonica za svaki sadržaj, uključujući pjesmice.
 function generatedIcon(x){
@@ -137,5 +152,5 @@ function render(){
 search.addEventListener('input',render);document.getElementById('clear').onclick=()=>{chosen='all';search.value='';render()};
 function build(names){const unique=[...new Set(names)];if(unique.includes("lekcije-ilmihal2-ikindija")){const i=unique.indexOf("lekcija-ilmihal2-ikindija");if(i!==-1)unique.splice(i,1)}items=unique.filter(n=>n&&!/^(digitalni-mektebski-centar|mektebski-portal)$/.test(n)).map(n=>({name:n,title:sacredCapitalization(nice(n)),group:group(n),url:'https://'+owner+'.github.io/'+encodeURIComponent(n)+'/'}));items.sort((a,b)=>groups.findIndex(g=>g[0]===a.group)-groups.findIndex(g=>g[0]===b.group)||rank(a)-rank(b)||a.title.localeCompare(b.title,'bs'));render()}
 build(fallback);
-(async()=>{try{let names=[];for(let page=1;page<=10;page++){let res=await fetch(`https://api.github.com/users/${owner}/repos?per_page=100&page=${page}&sort=updated`,{headers:{Accept:'application/vnd.github+json'}});if(!res.ok)throw Error('GitHub API '+res.status);let data=await res.json();names.push(...data.filter(x=>!x.private&&x.has_pages!==false).map(x=>x.name));if(data.length<100)break}if(names.length){build([...names,...fallback]);document.getElementById('status').textContent='✓ Učitani javni GitHub projekti i poznate poveznice. Portal automatski prikazuje nove javne repozitorije kada osvježiš stranicu.'}else throw Error('Nema projekata')}catch(e){document.getElementById('status').textContent='Prikazani su poznati sadržaji. Trenutno nije moguće automatski učitati cijeli GitHub popis; pokušaj ponovo kasnije.'}})();
+(async()=>{try{let names=[];for(let page=1;page<=10;page++){let res=await fetch(`https://api.github.com/users/${owner}/repos?per_page=100&page=${page}&sort=updated`,{headers:{Accept:'application/vnd.github+json'}});if(!res.ok)throw Error('GitHub API '+res.status);let data=await res.json();names.push(...data.filter(x=>!x.private&&x.has_pages!==false).map(x=>x.name));if(data.length<100)break}if(names.length){confirmedRepoNames=new Set(names);build([...names,...fallback]);document.getElementById('status').textContent='✓ Učitani javni GitHub projekti i poznate poveznice. Portal automatski prikazuje nove javne repozitorije kada osvježiš stranicu.'}else throw Error('Nema projekata')}catch(e){document.getElementById('status').textContent='Prikazani su poznati sadržaji. Trenutno nije moguće automatski učitati cijeli GitHub popis; pokušaj ponovo kasnije.'}})();
 </script></body></html>
