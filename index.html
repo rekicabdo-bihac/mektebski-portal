@@ -16,7 +16,7 @@ header{padding:9px 12px}
 .signature{width:auto;flex:1 1 45%;font-size:10px;text-align:right;max-width:58%;line-height:1.35}
 }
 @media(max-width:350px){.item h3{font-size:12px}.item a{font-size:11px}.signature{font-size:9px}}
-.visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#f0f8f4}.visual img{width:100%;height:100%;object-fit:contain}.emojiVisual{font-size:clamp(44px,8vw,75px);background:linear-gradient(145deg,#e2f5e9,#dbe9ff)}.item{padding:10px}.item h3{font-size:15px}.unlinked{background:#f2f4f3;padding:9px;border-radius:8px;text-align:center}.grid{margin-bottom:24px}@media(max-width:650px){.item{padding:7px}.item h3{font-size:12px}.visual{border-radius:9px}} </style><script>
+.visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:#f0f8f4}.visual img{width:100%;height:100%;object-fit:contain}.emojiVisual{font-size:clamp(44px,8vw,75px);background:linear-gradient(145deg,#e2f5e9,#dbe9ff)}.item{padding:10px}.item h3{font-size:15px}.unlinked{background:#f2f4f3;padding:9px;border-radius:8px;text-align:center}.grid{margin-bottom:24px}@media(max-width:650px){.item{padding:7px}.item h3{font-size:12px}.visual{border-radius:9px}} <style>.portal-edit-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.portal-edit-tools button,.edit-card-btn,.editor-actions button{border:0;border-radius:9px;padding:11px 14px;font-weight:700;background:#075f51;color:white}.portal-edit-tools .secondary,.editor-actions .secondary{background:#e7f1ee;color:#064c42}.portal-edit-tools .hint{font-size:12px;width:100%}.edit-card-btn{margin-top:9px;width:100%;background:#d6eee6;color:#075044}#portalEditor{border:0;border-radius:15px;padding:18px;width:min(92vw,520px);max-height:90vh;overflow:auto}#portalEditor::backdrop{background:#0009}#portalEditor label{display:block;margin:12px 0 4px;font-weight:700}#portalEditor input,#portalEditor select{display:block;width:100%;padding:11px;border:1px solid #9db8b0;border-radius:8px;box-sizing:border-box;font-size:16px}#portalEditor .editor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}</style></style><script id="portal-manual-data" type="application/json">{}</script><script>
 /* Google Analytics: consent mode (default denied); no analytics cookies without consent. */
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments)}
@@ -48,7 +48,7 @@ function trackPortalEvent(event,details){if(typeof gtag==='function')gtag('event
     });
   },true);
 })();
-</script></head><body><header><div class="head"><div><div class="brand">☪ DIGITALNI MEKTEBSKI CENTAR</div><div class="sub">Muftijstvo bihaćko · Medžlis IZ Bihać</div></div><div class="signature">Pripremio Abdo ef. Rekić – na prijedlog glavnog imama magistra Mensur ef. Ćehića, uz podršku svojih radnih kolega Medžlisa IZ Bihać</div></div></header><main><section class="hero"><h1>Učimo, vježbamo i takmičimo se!</h1><p>Obrazovni portal s interaktivnim lekcijama, učenjem Kur'ana, kvizovima, igricama i mektebskim takmičenjima. Lekcije Ilmihala 1, 2 i 3 poredane su prema sadržaju knjiga, a pjesmice, igre, kvizovi, memori kvizovi, dove i takmičenja odvojeni.</p></section><div class="notice" id="status">Učitavam popis sadržaja s GitHuba…</div><div class="tools"><input id="search" type="search" placeholder="🔎 Pretraži lekcije, sure, igre…" aria-label="Pretraži sadržaj"><button id="clear">Prikaži sve</button></div><nav class="categories" id="cats" aria-label="Kategorije"></nav><h2 id="heading">Svi sadržaji</h2><div class="grid" id="results"></div><footer>Digitalni mektebski centar · Pripremio Abdo ef. Rekić – na prijedlog glavnog imama magistra Mensur ef. Ćehića, uz podršku svojih radnih kolega Medžlisa IZ Bihać<br>Besplatan edukativni portal<br><small>Statistika posjeta koristi Google Analytics s isključenim analitičkim kolačićima dok nema pristanka. Moguće je ograničeno, zbirno mjerenje.</small></footer></main><script>
+</script></head><body><header><div class="head"><div><div class="brand">☪ DIGITALNI MEKTEBSKI CENTAR</div><div class="sub">Muftijstvo bihaćko · Medžlis IZ Bihać</div></div><div class="signature">Pripremio Abdo ef. Rekić – na prijedlog glavnog imama magistra Mensur ef. Ćehića, uz podršku svojih radnih kolega Medžlisa IZ Bihać</div></div></header><main><section class="hero"><h1>Učimo, vježbamo i takmičimo se!</h1><p>Obrazovni portal s interaktivnim lekcijama, učenjem Kur'ana, kvizovima, igricama i mektebskim takmičenjima. Lekcije Ilmihala 1, 2 i 3 poredane su prema sadržaju knjiga, a pjesmice, igre, kvizovi, memori kvizovi, dove i takmičenja odvojeni.</p></section><div class="notice" id="status">Učitavam popis sadržaja s GitHuba…</div><div class="tools"><input id="search" type="search" placeholder="🔎 Pretraži lekcije, sure, igre…" aria-label="Pretraži sadržaj"><button id="clear">Prikaži sve</button></div><div class="portal-edit-tools"><button type="button" id="togglePortalEdit">✏️ Uredi portal</button><button type="button" id="exportPortal" class="secondary" hidden>⬇️ Preuzmi uređeni index.html</button><span class="hint" id="editHint" hidden>Izmjene se čuvaju na ovom telefonu. Za objavu svima preuzmite index.html i zamijenite ga na GitHubu.</span></div><dialog id="portalEditor"><h2>Uredi karticu</h2><form id="editCardForm"><label>Naziv lekcije</label><input id="editTitle" required><label>Kategorija</label><select id="editGroup"></select><label>Redoslijed u kategoriji</label><input id="editOrder" type="number" min="1"><label>Ikonica – putanja PNG slike</label><input id="editImage" placeholder="ikonice/ilmihal1/01_naziv.png"><label>Poveznica lekcije</label><input id="editLink" type="url" placeholder="https://rekicabdo-bihac.github.io/.../"><div class="editor-actions"><button type="submit">Sačuvaj</button><button type="button" id="resetCard" class="secondary">Vrati karticu</button><button type="button" id="closeEditor" class="secondary">Odustani</button></div></form></dialog><nav class="categories" id="cats" aria-label="Kategorije"></nav><h2 id="heading">Svi sadržaji</h2><div class="grid" id="results"></div><footer>Digitalni mektebski centar · Pripremio Abdo ef. Rekić – na prijedlog glavnog imama magistra Mensur ef. Ćehića, uz podršku svojih radnih kolega Medžlisa IZ Bihać<br>Besplatan edukativni portal<br><small>Statistika posjeta koristi Google Analytics s isključenim analitičkim kolačićima dok nema pristanka. Moguće je ograničeno, zbirno mjerenje.</small></footer></main><script>
 const owner='rekicabdo-bihac';
 const fallback=`dove-kunut-dova|dove-ettehijjatu|ilmihal1-lekcije|ilmihal2-interaktivni|lekcije-preuzimanje-|lekcija-dinski-sarti|lekcija-imanski-sarti|lekcija-islamski-sarti|lekcija-abdest|lekcija-sabah-namaz|lekcija-aksam-namaz|lekcija-gusul-tejemum|lekcije-ilmihal2-podne|lekcije-ilmihal2-ikindija|lekcije-ilmihal2-post|lekcije-ilmihal2-zekat|lekcije-ilmihal2-hadzdz|lekcije-ilmihal2-poznati-alimi|lekcije-ilmihal2-porodica|lekcije-ilmihal2-domovina|lekcije-ilmihal2-zdrava-ishrana|lekcije-ilmihal2-urednost|lekcije-ilmihal2-lijepe-osobine|lekcije-ilmihal2-sredji-put|bekare-6-16|bekare-17-24|bekare-25-29|bekare-30-37|sura-fatiha|sura-ihlas|sura-felek|sura-nasr|sura-maun|tedzvid|citaj-kuran|kviz-namaz|kviz-tedzvid|kviz-ilmihal-1-a3|memori-sure|memori-namirnice|ilmihal-memori|penali|penali2|masa-slagalica|mektebski-detektiv-igra|mektebski-milijunas-online|online-mektebski-turnir2|mektebski-turnir|dnevni-mektebski-izazov`.split('|');
 const groups=[['ilmihal1','📗','Ilmihal 1'],['ilmihal2','📘','Ilmihal 2'],['ilmihal3','📙','Ilmihal 3'],['stranice','📖','Kur’an – stranice i ajeti'],['sure','🕌','Kur’an – sure'],['tedzvid','🔤','Tedžvid'],['dove','🤲','Dove'],['pjesmice','🎵','Pjesmice'],['memori_kviz','🧩','Memori kviz'],['kvizovi','🧠','Kvizovi'],['igrice','🎮','Igrice i memori'],['takmicenja','🏆','Takmičenja'],['downloads','⬇️','Preuzimanja']];
@@ -112,7 +112,45 @@ function generatedIcon(x){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 480 480"><rect width="480" height="480" rx="34" fill="${bg}"/><rect x="18" y="18" width="444" height="444" rx="26" fill="none" stroke="${fg}" stroke-width="5" opacity=".4"/><circle cx="240" cy="174" r="115" fill="white" opacity=".7"/><text x="240" y="222" text-anchor="middle" font-size="126" font-family="sans-serif">${glyph}</text><text x="70" y="98" font-size="28" fill="${fg}">${accents[seed%5]}</text><text x="397" y="260" font-size="28" fill="${fg}">${accents[(seed>>>4)%5]}</text><rect x="35" y="304" width="410" height="140" rx="19" fill="white" opacity=".95"/>${shown.map((v,i)=>`<text x="240" y="${344+i*37+(3-shown.length)*14}" font-size="${v.length>19?24:28}" font-weight="bold" font-family="Arial,sans-serif" fill="${fg}" text-anchor="middle">${v}</text>`).join('')}</svg>`;
  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
 }
-function makeCard(x,number,iconUrl,unlinked=false){
+
+const manualDataElement=document.getElementById('portal-manual-data');
+let savedManual={};try{savedManual=JSON.parse(manualDataElement.textContent||'{}')}catch(e){}
+let localManual={};try{localManual=JSON.parse(localStorage.getItem('mekteb-portal-manual-v1')||'{}')}catch(e){}
+let manualCards={...savedManual,...localManual},editingPortal=false,currentEditKey=null;
+const editor=document.getElementById('portalEditor'),editorGroup=document.getElementById('editGroup');
+groups.forEach(g=>{const opt=document.createElement('option');opt.value=g[0];opt.textContent=g[2];editorGroup.append(opt)});
+function getManual(key,base){return {...base,...(manualCards[key]||{})}}
+function saveManual(){localStorage.setItem('mekteb-portal-manual-v1',JSON.stringify(manualCards))}
+function editCard(key,base){
+ currentEditKey=key;const d=getManual(key,base);
+ document.getElementById('editTitle').value=d.title||'';
+ editorGroup.value=d.group||'ilmihal1';
+ document.getElementById('editOrder').value=d.order||'';
+ document.getElementById('editImage').value=d.image||'';
+ document.getElementById('editLink').value=d.url||'';
+ editor.showModal();
+}
+document.getElementById('closeEditor').onclick=()=>editor.close();
+document.getElementById('resetCard').onclick=()=>{if(currentEditKey){delete manualCards[currentEditKey];saveManual();editor.close();render()}};
+document.getElementById('editCardForm').onsubmit=e=>{
+ e.preventDefault();if(!currentEditKey)return;
+ const url=document.getElementById('editLink').value.trim();
+ if(url&&!/^https:\/\//i.test(url)){alert('Poveznica mora početi sa https://');return}
+ manualCards[currentEditKey]={title:document.getElementById('editTitle').value.trim(),group:editorGroup.value,order:Number(document.getElementById('editOrder').value)||0,image:document.getElementById('editImage').value.trim(),url};
+ saveManual();editor.close();render();
+};
+document.getElementById('togglePortalEdit').onclick=()=>{
+ editingPortal=!editingPortal;
+ document.getElementById('togglePortalEdit').textContent=editingPortal?'✓ Završi uređivanje':'✏️ Uredi portal';
+ document.getElementById('exportPortal').hidden=!editingPortal;
+ document.getElementById('editHint').hidden=!editingPortal;render();
+};
+document.getElementById('exportPortal').onclick=()=>{
+ manualDataElement.textContent=JSON.stringify(manualCards).replace(/</g,'\\u003c');
+ const blob=new Blob(['<!doctype html>\n'+document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='index.html';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+function makeCard(x,number,iconUrl,unlinked=false,editKey="",editBase=null){
  const el=document.createElement('article');el.className='item';
  const visual=document.createElement('div');visual.className='visual';
  if(iconUrl){const img=document.createElement('img');img.src=iconUrl;img.loading='lazy';img.alt='Ikonica: '+x.title;visual.append(img)}
@@ -122,6 +160,7 @@ function makeCard(x,number,iconUrl,unlinked=false){
  el.append(visual,h,s);
  if(x.url){const a=document.createElement('a');a.href=x.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Otvori lekciju ↗';a.addEventListener('click',()=>trackPortalEvent('content_open',{content_name:x.name,content_category:x.group}));el.append(a)}
  else{const note=document.createElement('small');note.className='unlinked';note.textContent='Poveznica lekcije nije pronađena';el.append(note)}
+ if(editingPortal&&editKey){const btn=document.createElement('button');btn.className='edit-card-btn';btn.type='button';btn.textContent='✏️ Uredi karticu';btn.onclick=()=>editCard(editKey,editBase);el.append(btn)}
  return el;
 }
 function render(){
@@ -130,18 +169,22 @@ function render(){
  results.replaceChildren();let count=0;
  const sections=chosen==='all'?groups.map(g=>g[0]):[chosen];
  for(const section of sections){
-  const isBook=!!bookLessons[section];
   let cards=[];
-  if(isBook){for(const lesson of bookLessons[section]){
-    const matched=findRepo(lesson,section);
-    const title=lesson.label.replace(/\b\w/g,c=>c.toLocaleUpperCase('bs'));
-    if(q&&!normalized(title).includes(q))continue;
-    cards.push(makeCard({title,group:section,name:matched?.name||'',url:matched?.url},lesson.number,lesson.image));
-  }}else{
-   const groupItems=items.filter(x=>x.group===section&&(!q||normalized(x.title).includes(q)));
-   groupItems.sort((a,b)=>section==='sure'?surahRank(a)-surahRank(b)||a.title.localeCompare(b.title,'bs'):a.title.localeCompare(b.title,'bs'));
-   cards=groupItems.map(x=>makeCard(x));
+  for(const [bookGroup,lessons] of Object.entries(bookLessons)){
+   for(const lesson of lessons){
+    const key='book:'+bookGroup+':'+lesson.number,matched=findRepo(lesson,bookGroup);
+    const base={title:lesson.label.replace(/\\b\\w/g,c=>c.toLocaleUpperCase('bs')),group:bookGroup,image:lesson.image,url:matched?.url||'',order:lesson.number};
+    const data=getManual(key,base);
+    if(data.group!==section||(q&&!normalized(data.title).includes(q)))continue;
+    cards.push({order:Number(data.order)||lesson.number,node:makeCard({title:data.title,group:data.group,name:matched?.name||'',url:data.url},lesson.number,data.image,false,key,base)});
+   }
   }
+  for(const x of items){
+   const key='repo:'+x.name,base={title:x.title,group:x.group,image:'',url:x.url,order:0},data=getManual(key,base);
+   if(data.group!==section||(q&&!normalized(data.title).includes(q)))continue;
+   cards.push({order:Number(data.order)||9999,node:makeCard({...x,title:data.title,group:data.group,url:data.url},null,data.image,false,key,base)});
+  }
+  cards.sort((a,b)=>a.order-b.order);cards=cards.map(c=>c.node);
   if(!cards.length)continue;
   if(chosen==='all'){const h=document.createElement('h2');h.textContent=groups.find(g=>g[0]===section)?.[2]||section;results.append(h)}
   const grid=document.createElement('div');grid.className='grid';cards.forEach(c=>grid.append(c));results.append(grid);count+=cards.length;
