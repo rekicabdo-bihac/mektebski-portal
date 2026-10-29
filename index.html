@@ -129,4 +129,13 @@ const directSure=[
 for(const [key,emoji,label] of categories){const b=document.createElement('button');b.type='button';b.dataset.cat=key;b.className='category-card';const pict=document.createElement('span');pict.className='category-pict';pict.textContent=emoji;const title=document.createElement('span');title.className='category-name';title.textContent=label;b.append(pict,title);b.onclick=()=>{selected=key;q.value='';draw();window.scrollTo({top:0,behavior:'smooth'})};nav.append(b)}
 for(const item of directSure){const e=entries.find(x=>x.repo===item.repo);if(!e)continue;const a=document.createElement('a');a.className='category-card direct-sure';a.style.background=item.repo==='sure-imihal-2'?'linear-gradient(145deg,#eee5ff,#c9b2f5)':'linear-gradient(145deg,#fff3d2,#f3c46a)';a.style.borderColor=item.repo==='sure-imihal-2'?'#8e69cb':'#c68b2c';a.style.color=item.repo==='sure-imihal-2'?'#43246e':'#623b08';a.href=e.url;a.target='_self';a.setAttribute('aria-label',item.label);const pict=document.createElement('span');pict.className='category-pict';pict.textContent=item.emoji;const title=document.createElement('span');title.className='category-name';title.textContent=item.label;a.append(pict,title);nav.insertBefore(a,nav.children[4]||null)}
 q.addEventListener('input',()=>{if(q.value.trim())selected='all';else selected='home';draw()});draw();syncGithub();
+</script><script>
+/* Analytics: bilježi samo otvaranje rubrika i poveznica, bez rezultata učenika. */
+document.addEventListener('click',function(event){
+  const item=event.target.closest('#cats [data-cat], #cats a, #grid a');
+  if(!item || typeof window.gtag!=='function')return;
+  const section=item.dataset.cat || item.closest('a')?.getAttribute('href') || '';
+  const title=(item.getAttribute('aria-label') || item.innerText || '').trim().slice(0,120);
+  gtag('event','mekteb_menu_open',{menu_section:section,menu_item:title});
+},true);
 </script></body></html>
