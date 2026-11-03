@@ -103,6 +103,7 @@ function classifyRepo(name){
  if(n.startsWith('sura-')||n.startsWith('sure-')||n.startsWith('suretu-'))return 'sure';
  if(n.startsWith('bekare-')||n.startsWith('kuranske-stranice-'))return 'stranice';
  if(n.includes('tedzvid'))return 'tedzvid';
+ if(n.includes('milijunas')||n.includes('milijunaš')||n.includes('milioner'))return 'milijunas';
  if(n.includes('takmicenj')||n.includes('takmičenj')||n.includes('turnir')||n.includes('online'))return 'takmicenja';
  if(n.includes('memori'))return 'memori';
  if(n.includes('milijunas')||n.includes('milioner'))return 'milijunas';
@@ -123,6 +124,11 @@ for(const e of entries){
 for(const e of entries){
  const n=(e.repo+' '+e.label).toLocaleLowerCase('bs');
  if(n.includes('memori')&&(n.includes('takmicenj')||n.includes('takmičenj')||n.includes('takmičenje')))e.cat='takmicenja';
+}
+// Sve postojeće igre s nazivom Milijunaš pripadaju istoj rubrici.
+for(const e of entries){
+ const n=(e.repo+' '+e.label).toLocaleLowerCase('bs');
+ if(n.includes('milijunas')||n.includes('milijunaš')||n.includes('milioner'))e.cat='milijunas';
 }
 // Uredni nazivi i tematske ikone za automatski pronađene repozitorije.
 const bosnianWords={dzennet:'Džennet',dzehennem:'Džehennem',dzennetom:'Džennetom',dzamija:'džamija',dzamije:'džamije',dzamiju:'džamiju',dzemat:'džemat',dzematu:'džematu',dzini:'džini',dzuma:'Džuma',dzelle:'dželle',dz:'dž.',sehadet:'šehadet',sarti:'šarti',sart:'šart',namaski:'namaski',imanski:'imanski',islamski:'islamski',sehvi:'sehvi',sedzda:'sedžda',tevhid:'tevhid',kuran:'Kur’an',mekteb:'mekteb',mektebski:'mektebski',melaiketihi:'melaiketihi',ahiret:'ahiret',sirat:'Sirat',cuprija:'ćuprija',pcelica:'pčelica',pcelar:'pčelar',srece:'sreće',sretno:'sretno',tacno:'tačno',tacnost:'tačnost',nauceno:'naučeno',ucimo:'učimo',ucenje:'učenje',pocetak:'početak',pocinje:'počinje',ciscenje:'čišćenje',cistoca:'čistoća',lijepo:'lijepo',ponasanje:'ponašanje',nasa:'naša',nase:'naše',vaznost:'važnost',znacaj:'značaj',osobine:'osobine',zivot:'život',svijet:'svijet',boziji:'Božiji',bozija:'Božija',allahovih:'Allahovih',allahove:'Allahove',allahova:'Allahova',allah:'Allah',poslanici:'poslanici',poslanika:'poslanika',poslanik:'poslanik',rijeci:'riječi',trazenje:'traženje',pjesmice:'pjesmice',takmicenje:'takmičenje',takmicenja:'takmičenja',takmicarski:'takmičarski',takmicenje:'takmičenje',islamskih:'islamskih',dova:'dova',dove:'dove',hadz:'hadž',hadzdz:'hadž',hidzretska:'hidžretska',hidzra:'hidžra',mudzize:'mudžize',gajb:'gajb',sifati:'sifati',zatijje:'zatijje',subutijje:'subutijje',firdevs:'Firdevs',arš:'Arš',ars:'Arš',mizan:'Mizan',sefaat:'šefa’at',sefaat:'šefa’at',miradz:'Miradž',isra:'Isra',dz:'dž',as:'a.s.',bih:'BiH'};
