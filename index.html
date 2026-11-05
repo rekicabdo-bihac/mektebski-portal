@@ -54,7 +54,7 @@ for(const e of entries){
  const n=(e.repo||'').toLowerCase();
  if(/^udzbenik-ilmihal[123]$/.test(n)||n==='ejjuhel-weled')e.cat='udzbenici';
 }
-const categories=[['all','🏠','Sve oblasti'],['ilmihal1','📗','Ilmihal 1'],['ilmihal2','📘','Ilmihal 2'],['ilmihal3','📙','Ilmihal 3'],['udzbenici','📚','Udžbenici'],['stranice','📖','Kur’an stranice'],['sure','📜','Kur’anske sure'],['suretrans','🔠','Kur’anske sure – transkripcija'],['tedzvid','🔤','Tedžvid'],['dove','🤲','Dove'],['pjesmice','🎵','Pjesmice'],['memori','🧩','Memori'],['kvizovi','🧠','Kvizovi'],['milijunas','💰','Milijunaš'],['igrice','🎮','Igrice'],['takmicenja','🏆','Takmičenja'],['trazenjerijeci','🔎','Traženje riječi'],['ostalo','📚','Ostalo']];
+const categories=[['all','🏠','Sve oblasti'],['ilmihal1','📗','Ilmihal 1'],['ilmihal2','📘','Ilmihal 2'],['ilmihal3','📙','Ilmihal 3'],['udzbenici','📚','Udžbenici'],['stranice','📖','Kur’an stranice'],['sure','📜','Kur’anske sure'],['suretrans','🔠','Kur’anske sure – transkripcija'],['tedzvid','🔤','Tedžvid'],['dove','🤲','Dove'],['pjesmice','🎵','Pjesmice'],['memori','🧩','Memori'],['kvizovi','🧠','Kvizovi'],['vjezbe','✍️','Vježbe'],['milijunas','💰','Milijunaš'],['igrice','🎮','Igrice'],['takmicenja','🏆','Takmičenja'],['trazenjerijeci','🔎','Traženje riječi'],['ostalo','📚','Ostalo']];
 let selected='home',lastSync='';const grid=document.getElementById('grid');const q=document.getElementById('q');const status=document.getElementById('status');const nav=document.getElementById('cats');
 // Automatska dopuna: ručno raspoređene stavke uvijek imaju prednost.
 const GH_USER='rekicabdo-bihac', CACHE_KEY='mekteb_github_repos_v4', CACHE_MS=5*60*1000;
@@ -85,6 +85,8 @@ function lessonInfo(name){
 }
 function classifyRepo(name){
  const n=name.toLocaleLowerCase('bs');
+ if(n.startsWith('vjezbe'))return 'vjezbe';
+ if(n==='kviz-ilmihal2-'||n==='kviz-ilmihal2')return 'milijunas';
  if(n==='lekcije-ilmihal1-ja-u-mekteb-idem')return 'ilmihal1';
  if(['boziji-kitabi','svojstva-allahovih-poslanika'].includes(n)||n.includes('trazenje-rijeci')||n.includes('trazenje-rijeci'))return 'trazenjerijeci';
  const lesson=lessonInfo(name);
@@ -112,6 +114,8 @@ function classifyRepo(name){
  if(n.includes('igrica')||n.includes('mektebski-')||n.includes('igra-')||n.includes('penali')||n.includes('pcelica')||n.includes('labirint'))return 'igrice';
  return 'ostalo';
 }
+// Posebno pravilo: sve Vježbe i Kviz Ilmihal 2, i za već poznate stavke.
+for(const e of entries){const n=(e.repo||'').toLocaleLowerCase('bs');if(n.startsWith('vjezbe'))e.cat='vjezbe';if(n==='kviz-ilmihal2-'||n==='kviz-ilmihal2')e.cat='milijunas';}
 // Normalizacija postojećih stavki: nove numerisane lekcije se raspoređuju i bez ponavljanja.
 for(const e of entries){
  const info=lessonInfo(e.repo);
@@ -130,6 +134,8 @@ for(const e of entries){
  const n=(e.repo+' '+e.label).toLocaleLowerCase('bs');
  if(n.includes('milijunas')||n.includes('milijunaš')||n.includes('milioner'))e.cat='milijunas';
 }
+// Konačni prioritet kategorija nakon svih prethodnih pravila.
+for(const e of entries){const n=(e.repo||'').toLocaleLowerCase('bs');if(n.startsWith('vjezbe'))e.cat='vjezbe';if(n==='kviz-ilmihal2-'||n==='kviz-ilmihal2')e.cat='milijunas';}
 // Uredni nazivi i tematske ikone za automatski pronađene repozitorije.
 const bosnianWords={dzennet:'Džennet',dzehennem:'Džehennem',dzennetom:'Džennetom',dzamija:'džamija',dzamije:'džamije',dzamiju:'džamiju',dzemat:'džemat',dzematu:'džematu',dzini:'džini',dzuma:'Džuma',dzelle:'dželle',dz:'dž.',sehadet:'šehadet',sarti:'šarti',sart:'šart',namaski:'namaski',imanski:'imanski',islamski:'islamski',sehvi:'sehvi',sedzda:'sedžda',tevhid:'tevhid',kuran:'Kur’an',mekteb:'mekteb',mektebski:'mektebski',melaiketihi:'melaiketihi',ahiret:'ahiret',sirat:'Sirat',cuprija:'ćuprija',pcelica:'pčelica',pcelar:'pčelar',srece:'sreće',sretno:'sretno',tacno:'tačno',tacnost:'tačnost',nauceno:'naučeno',ucimo:'učimo',ucenje:'učenje',pocetak:'početak',pocinje:'počinje',ciscenje:'čišćenje',cistoca:'čistoća',lijepo:'lijepo',ponasanje:'ponašanje',nasa:'naša',nase:'naše',vaznost:'važnost',znacaj:'značaj',osobine:'osobine',zivot:'život',svijet:'svijet',boziji:'Božiji',bozija:'Božija',allahovih:'Allahovih',allahove:'Allahove',allahova:'Allahova',allah:'Allah',poslanici:'poslanici',poslanika:'poslanika',poslanik:'poslanik',rijeci:'riječi',trazenje:'traženje',pjesmice:'pjesmice',takmicenje:'takmičenje',takmicenja:'takmičenja',takmicarski:'takmičarski',takmicenje:'takmičenje',islamskih:'islamskih',dova:'dova',dove:'dove',hadz:'hadž',hadzdz:'hadž',hidzretska:'hidžretska',hidzra:'hidžra',mudzize:'mudžize',gajb:'gajb',sifati:'sifati',zatijje:'zatijje',subutijje:'subutijje',firdevs:'Firdevs',arš:'Arš',ars:'Arš',mizan:'Mizan',sefaat:'šefa’at',sefaat:'šefa’at',miradz:'Miradž',isra:'Isra',dz:'dž',as:'a.s.',bih:'BiH'};
 // Naslovi: početno veliko slovo i dosljedno veliko slovo za Allah, Bog i izvedenice.
@@ -169,11 +175,12 @@ function themeEmoji(e){
  if(/memori/.test(n))return '🧩';
  if(/pjesm|ilahij|muzik/.test(n))return '🎶';
  if(/dova|zikr/.test(n))return '🤲';
+ if(n.startsWith('vjezbe'))return '✍️';
  if(/kviz|pitanj/.test(n))return '🧠';
  if(/penali|fudbal/.test(n))return '⚽';
  if(/pcel|med/.test(n))return '🐝';
  if(/dzamij/.test(n))return '🕌';
- return ({ilmihal1:'📗',ilmihal2:'📘',ilmihal3:'📙',dove:'🤲',stranice:'📖',sure:'📜',suretrans:'🔠',tedzvid:'🔤',pjesmice:'🎵',memori:'🧩',kvizovi:'🧠',milijunas:'💰',igrice:'🎮',takmicenja:'🏆',trazenjerijeci:'🔎',udzbenici:'📚',ostalo:'📚'})[e.cat]||'📖';
+ return ({ilmihal1:'📗',ilmihal2:'📘',ilmihal3:'📙',dove:'🤲',stranice:'📖',sure:'📜',suretrans:'🔠',tedzvid:'🔤',pjesmice:'🎵',memori:'🧩',kvizovi:'🧠',vjezbe:'✍️',milijunas:'💰',igrice:'🎮',takmicenja:'🏆',trazenjerijeci:'🔎',udzbenici:'📚',ostalo:'📚'})[e.cat]||'📖';
 }
 function mergeRepos(repos){
  const known=new Set(entries.map(e=>e.repo.toLowerCase()));let added=0;
