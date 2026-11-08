@@ -238,8 +238,14 @@ function suraOrder(e){
  return 999;
 }
 function draw(){
- // Provjeri početak naziva i za ručno unesene i za naknadno učitane GitHub projekte.
- for(const e of entries){const priority=prefixCategory(e.repo)||prefixCategory(e.label);if(priority)e.cat=priority;}
+ // Obavezni prioritet: tri takmičarska memorija, bez obzira na ranije oznake i keš.
+ const competitionMemory=new Set(['takmicenja-memori-poslanici','takmicenja-memori-prevod-ajeta','takmicenja-ilmihal1-1330-memori']);
+ for(const e of entries){
+  const repo=String(e.repo||'').toLocaleLowerCase('bs');
+  if(competitionMemory.has(repo)){e.cat='takmicenja';continue;}
+  const priority=prefixCategory(e.repo)||prefixCategory(e.label);
+  if(priority)e.cat=priority;
+ }
  window.selectedCategoryForAnalytics=selected;
  grid.replaceChildren();const search=q.value.trim().toLocaleLowerCase('bs');
  const home=selected==='home'&&!search;
