@@ -145,7 +145,7 @@ for(const e of entries){
 // Konačni prioritet kategorija nakon svih prethodnih pravila.
 for(const e of entries){const n=(e.repo||'').toLocaleLowerCase('bs');if(n.startsWith('vjezbe'))e.cat='vjezbe';if(n==='kviz-ilmihal2-'||n==='kviz-ilmihal2')e.cat='milijunas';}
 // Pravilo početnog prefiksa ima apsolutni prioritet nad sadržajem ostatka naziva.
-for(const e of entries){const priority=prefixCategory(e.repo);if(priority)e.cat=priority;}
+for(const e of entries){const priority=prefixCategory(e.repo)||prefixCategory(e.label);if(priority)e.cat=priority;}
 // Uredni nazivi i tematske ikone za automatski pronađene repozitorije.
 const bosnianWords={dzennet:'Džennet',dzehennem:'Džehennem',dzennetom:'Džennetom',dzamija:'džamija',dzamije:'džamije',dzamiju:'džamiju',dzemat:'džemat',dzematu:'džematu',dzini:'džini',dzuma:'Džuma',dzelle:'dželle',dz:'dž.',sehadet:'šehadet',sarti:'šarti',sart:'šart',namaski:'namaski',imanski:'imanski',islamski:'islamski',sehvi:'sehvi',sedzda:'sedžda',tevhid:'tevhid',kuran:'Kur’an',mekteb:'mekteb',mektebski:'mektebski',melaiketihi:'melaiketihi',ahiret:'ahiret',sirat:'Sirat',cuprija:'ćuprija',pcelica:'pčelica',pcelar:'pčelar',srece:'sreće',sretno:'sretno',tacno:'tačno',tacnost:'tačnost',nauceno:'naučeno',ucimo:'učimo',ucenje:'učenje',pocetak:'početak',pocinje:'počinje',ciscenje:'čišćenje',cistoca:'čistoća',lijepo:'lijepo',ponasanje:'ponašanje',nasa:'naša',nase:'naše',vaznost:'važnost',znacaj:'značaj',osobine:'osobine',zivot:'život',svijet:'svijet',boziji:'Božiji',bozija:'Božija',allahovih:'Allahovih',allahove:'Allahove',allahova:'Allahova',allah:'Allah',poslanici:'poslanici',poslanika:'poslanika',poslanik:'poslanik',rijeci:'riječi',trazenje:'traženje',pjesmice:'pjesmice',takmicenje:'takmičenje',takmicenja:'takmičenja',takmicarski:'takmičarski',takmicenje:'takmičenje',islamskih:'islamskih',dova:'dova',dove:'dove',hadz:'hadž',hadzdz:'hadž',hidzretska:'hidžretska',hidzra:'hidžra',mudzize:'mudžize',gajb:'gajb',sifati:'sifati',zatijje:'zatijje',subutijje:'subutijje',firdevs:'Firdevs',arš:'Arš',ars:'Arš',mizan:'Mizan',sefaat:'šefa’at',sefaat:'šefa’at',miradz:'Miradž',isra:'Isra',dz:'dž',as:'a.s.',bih:'BiH'};
 // Naslovi: početno veliko slovo i dosljedno veliko slovo za Allah, Bog i izvedenice.
@@ -238,6 +238,8 @@ function suraOrder(e){
  return 999;
 }
 function draw(){
+ // Provjeri početak naziva i za ručno unesene i za naknadno učitane GitHub projekte.
+ for(const e of entries){const priority=prefixCategory(e.repo)||prefixCategory(e.label);if(priority)e.cat=priority;}
  window.selectedCategoryForAnalytics=selected;
  grid.replaceChildren();const search=q.value.trim().toLocaleLowerCase('bs');
  const home=selected==='home'&&!search;
